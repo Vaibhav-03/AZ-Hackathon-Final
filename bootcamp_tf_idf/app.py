@@ -139,20 +139,27 @@ def calculate_sorted_order_of_documents(query_terms):
         link_list.append({"Question Link":link,"Score":potential_documents[document_id]})    
     return link_list
 
-query_string = input('Enter your query: ')
-query_terms = [term.lower() for term in query_string.strip().split()]
+# query_string = input('Enter your query: ')
+# query_terms = [term.lower() for term in query_string.strip().split()]
 
-print(query_terms)
-ans=calculate_sorted_order_of_documents(query_terms) 
+# print(query_terms)
+# ans=calculate_sorted_order_of_documents(query_terms) 
 # print(ans)   
 app=Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'
+
+class SearchForm(FlaskForm):
+    search = StringField('Enter your query term', validators=[DataRequired()])
+    submit = SubmitField('Search')
 
 @app.route('/',methods=['GET','POST'])
 def home():
-    if request.method=='POST':
-        query=request.form['query']
+    form=SearchForm()
+    result=[]
+    if form.validate_on_submit():
+        query=form.search.data
         query_=[term.lower() for term in query.strip().split()]
         result=calculate_sorted_order_of_documents(query_)
         result=result[:15]
-        return render_template('result.html',result=result)
-    return render_template('form.html')
+    return render_template('index.html',form=form,result=result)
+    
