@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search and Result</title>
+</head>
+<body>
+    <h1>Search</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.search.label }} {{ form.search(size=20) }}
+        {{ form.submit() }}
+    </form>
+
+    {% if result %}
+        <h1>Result:</h1>
+        <ul>
+            {% for item in result[:15] %}
+            <li><a href="{{ item['Question Link'] }}">{{ item['Question Link'] }}</a></li>
+            <p>Score:{{item['Score']}}</p>   
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
