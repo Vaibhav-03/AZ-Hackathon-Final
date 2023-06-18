@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result:</h1>
+    <ul>
+        {% for item in result %}
+        <li><a href="{{ item['Question Link'] }}">{{ item['Question Link'] }}</a></li>
+        <p>Score:{{item['Score']}}</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
