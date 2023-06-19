@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Search and Result</title>
-</head>
-<body>
+  <head>
+    <title>CodeSearch</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1a1f2b;
+        margin: 0;
+        padding: 20px;
+        color: #ffffff;
+      }
+
+      h1 {
+        text-align: center;
+        color: #ffffff;
+      }
+
+      form {
+        margin: 20px auto;
+        text-align: center;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        color: #000000;
+      }
+
+      input[type="text"]::placeholder {
+        color: #ffffff;
+        opacity: 0.7;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4caf50;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+        counter-increment: my-counter;
+        align-items: center;
+        padding-left: 250px;
+      }
+
+      li:before {
+        content: counter(my-counter) ". ";
+        color: #ffffff;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      p {
+        margin-top: 5px;
+      }
+
+      .logo {
+        display: block;
+        margin: 0 auto;
+        width: 150px;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Search</h1>
     <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.search.label }} {{ form.search(size=20) }}
-        {{ form.submit() }}
+      {{ form.csrf_token }} {{ form.search.label }} {{
+      form.search(size=20,class="search-input") }}
+      <input type="submit" value="Search" />
     </form>
-
+    <img
+      class="logo"
+      src="https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3628885-3030025.png"
+      alt="LeetCode Logo"
+    />
+    <h1>Leetcode</h1>
     {% if result %}
-        <h1>Result:</h1>
-        <ul>
-            {% for item in result[:15] %}
-            <li><a href="{{ item['Question Link'] }}">{{ item['Question Link'] }}</a></li>
-            <p>Score:{{item['Score']}}</p>   
-            {% endfor %}
-        </ul>
+    <h1>Questions:</h1>
+    <ul>
+      {% for item in result[:15] %}
+      <li>
+        <h3>
+          <a href="{{ item['Question Link'] }}">{{ item['Question Link'] }}</a>
+        </h3>
+        <p>Score: {{ item['Score'] }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p style="padding-left: 250px; align-items: center;">Please Enter a Valid Query.</p>
     {% endif %}
-</body>
+  </body>
 </html>
