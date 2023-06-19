@@ -1,5 +1,5 @@
---> How to run this Project <br/>
-# AZ-Hackathon-Scarpping
+
+# AZ-Hackathon-Scrapping
 Get the dataset from 'Qdata' branch of https://github.com/prabaljainn/Leetcode-Questions-Scrapper/tree/data<br/>
 
 This project helps the user to search for any LeetCode Question by entering their query(words or sentence) and get the link to the most related questions.
