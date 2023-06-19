@@ -172,9 +172,14 @@ class SearchForm(FlaskForm):
 def home():
     form = SearchForm()
     result = []
+    query_=[]
     if form.validate_on_submit():
         query = form.search.data
         query_ = [term.lower() for term in query.strip().split()]
         result = calculate_sorted_order_of_documents(query_)
-        result = result[:15]
-    return render_template('index.html', form=form, result=result)    
+        result = result[:20]
+    if len(query_) != 0:
+            search_triggered = True
+    else:
+            search_triggered = False
+    return render_template('index.html', form=form, result=result,search_triggered=search_triggered)    

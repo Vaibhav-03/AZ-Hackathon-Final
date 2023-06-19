@@ -106,7 +106,9 @@
       {% endfor %}
     </ul>
     {% else %}
-    <p style="padding-left: 250px; align-items: center;">Please Enter a Valid Query.</p>
+      {% if search_triggered %}
+         <p style="padding-left: 250px; align-items: center;">No results found .Please enter a different query.</p>
+      {% endif %}   
     {% endif %}
   </body>
 </html>
